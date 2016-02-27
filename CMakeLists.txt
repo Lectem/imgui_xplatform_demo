@@ -18,9 +18,12 @@ add_executable(imgui-sdl2-web ${SOURCE_FILES} ${IMGUI_IMPLEMENTATION_FILES} ${IM
 target_include_directories(imgui-sdl2-web PUBLIC imgui ${SDL2_INCLUDE_DIR})
 target_link_libraries(imgui-sdl2-web ${SDL2_LIBRARY} ${OPENGL_LIBRARIES} )
 
+set_property(TARGET imgui-sdl2-web PROPERTY CXX_STANDARD_REQUIRED ON)
 set_property(TARGET imgui-sdl2-web PROPERTY CXX_STANDARD 11)
 
 if(CMAKE_SYSTEM_NAME MATCHES "Emscripten")
+    #temp fix for emscripten, since it does not detect compiler features
+    target_compile_options(imgui-sdl2-web PRIVATE "-std=c++11")
     set(CMAKE_EXECUTABLE_SUFFIX ".html")
     SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -s USE_SDL=2")
 endif()
