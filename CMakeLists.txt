@@ -18,6 +18,9 @@ add_executable(imgui-sdl2-web ${SOURCE_FILES} ${IMGUI_IMPLEMENTATION_FILES} ${IM
 target_include_directories(imgui-sdl2-web PUBLIC imgui ${SDL2_INCLUDE_DIR})
 target_link_libraries(imgui-sdl2-web ${SDL2_LIBRARY} ${OPENGL_LIBRARIES} )
 
+include(RunFixupBundle)
+run_fixup(imgui-sdl2-web "" ${SDL2_LIBRARY_DIR})
+
 set_property(TARGET imgui-sdl2-web PROPERTY CXX_STANDARD_REQUIRED ON)
 set_property(TARGET imgui-sdl2-web PROPERTY CXX_STANDARD 11)
 
